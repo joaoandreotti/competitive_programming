@@ -1,0 +1,10 @@
+achar uma relacao recursiva de uma funcao e transformar em uma matriz
+
+ex:
+FIBONACCI
+f (i) = 0 se i = 1
+f (i) = 1 se i = 2
+f (i) = f (i - 1) + f (i - 2) se i >= 2
+
+| f (i)     | = | 2 x 2 | * | f (i - 1) |
+| f (i - 1) |       ?       | f (i - 2) |

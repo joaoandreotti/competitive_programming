@@ -1,0 +1,4 @@
+std::vector <int> g [3];
+
+
+g [0].push_back (3)

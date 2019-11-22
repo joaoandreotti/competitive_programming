@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+
+const int MAXN = 1e5 + 1;
+int n;
+int input [MAXN], count [2 * MAXN], start [MAXN];
+typedef std::pair <std::pair <int, int>, std::pair <int, std::pair <int, int>> > pip;
+std::vector <pip > v;
+#define ff first.first //  maior esq
+#define fs first.second //  quantos tem esq
+#define sf second.first //  maior dir
+#define ssf second.second.first //  quantos tem dir
+#define sss second.second.second //  maior de todo
+
+void build () {
+  for (int i = n - 1; i > 0; i--)
+    v [i] = cmp (v [i << 1], v [(i << 1) + 1]);
+}
+
+pip cmp (pip a, pip b) {
+  pip c;
+
+  if (a.sf == b.ff) {
+    if (a.ssf + b.fs >= std::max (a.sss, b.sss))
+      c.sss = a.ssf + b.fs;
+    else
+      c.sss = std::max (a.ff, b.ssf);
+
+  }
+}
+
+int main () {
+  int q;
+  scanf ("%d%d", &n, &q);
+
+  v.assert (n + 1, 0);
+
+  for (int i = 0; i < n; i++)
+    scanf ("%d", input + i);
+  return 0;
+}

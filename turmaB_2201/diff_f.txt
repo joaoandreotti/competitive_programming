@@ -1,0 +1,103 @@
+2,21c2,21
+< 
+< const int MAXT = 1e2 + 2, INF = 0x3f3f3f3f;
+< 
+< int n, m, t, a, cs = 1, arr [MAXT];
+< int fwd [MAXT][MAXT];
+< int bwd [MAXT][MAXT];
+< int dp [MAXT][MAXT];
+< 
+< int f (int st, int tm) {
+<   if (tm > t or st > n) return INF;
+<   if (st == n and tm == t) return 0;
+< 
+<   int &ans = dp [st][tm];
+<   if (~(ans)) return ans;
+< 
+< 
+<   ans = f (st, tm + 1) + 1;
+< 
+<   if (fwd [st][tm]) ans = std::min (ans, f (st + 1, tm + arr [st]));
+<   if (bwd [st][tm]) ans = std::min (ans, f (st - 1, tm + arr [st - 1]));
+---
+> using namespace std;
+> #define N 55
+> #define T 222
+> #define oo 0x3f3f3f3f
+> 
+> int tc, n, maxt, m, s, c[N];
+> int fwd[N][T]; // goes forward?
+> int bwd[N][T];
+> int memo[N][T];
+> 
+> int f(int i, int t) {
+>   if (t > maxt or i > n) return oo;
+>   if (i == n and t == maxt) return 0;
+> 
+>   int& ans = memo[i][t];
+>   if (~ans) return ans;
+> 
+>   ans = f(i, t+1)+1;
+>   if (fwd[i][t]) ans = min (ans, f(i+1, t+c[i]));
+>   if (bwd[i][t]) ans = min (ans, f(i-1, t+c[i-1]));
+27,30c27,30
+<   while (scanf ("%d", &n) && n) {
+<     memset (dp, -1, sizeof dp);
+<     memset (fwd, 0, sizeof fwd);
+<     memset (bwd, 0, sizeof bwd);
+---
+>   while (cin >> n and n) {
+>     memset(memo, -1, sizeof memo);
+>     memset(fwd, 0, sizeof fwd);
+>     memset(bwd, 0, sizeof bwd);
+32c32
+<     scanf ("%d", &t);
+---
+>     cin >> maxt;
+34c34
+<       scanf ("%d", arr + i);
+---
+>       cin >> c[i];
+36,37c36,37
+< 
+<     scanf ("%d", &m);
+---
+>     
+>     cin >> m;
+39c39
+<       scanf ("%d", &a);
+---
+>       cin >> s;
+41,42c41,42
+<         fwd [j][a] = 1;
+<         a += arr [j];
+---
+>         fwd[j][s] = 1;
+>         s += c[j];
+45,46c45,46
+<     
+<     scanf ("%d", &m);
+---
+> 
+>     cin >> m;
+48c48
+<       scanf ("%d", &a);
+---
+>       cin >> s;
+50,51c50,51
+<         bwd [j][a] = 1;
+<         a += arr [j - 1];
+---
+>         bwd[j][s] = 1;
+>         s += c[j-1];
+55,58c55,59
+<     int ans = f (1, 0);
+<     if (ans < INF) printf ("Case Number %d: %d\n", cs++, ans);
+<     else printf ("Case Number %d: impossible\n", cs++);
+< 
+---
+>     cout << "Case Number " << ++tc << ": ";
+>     int ans = f(1, 0);
+>     if (ans < oo) cout << ans;
+>     else cout << "impossible";
+>     cout << endl;

@@ -1,0 +1,8 @@
+#include <bits/stdc++.h>
+
+int main () {
+  int x, n;
+  std::string name;
+  scanf ("%d", &x);
+  return 0;
+}
